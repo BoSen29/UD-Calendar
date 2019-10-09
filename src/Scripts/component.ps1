@@ -15,15 +15,38 @@
 .NOTES
     General notes
 #>
-function <%=$PLASTER_PARAM_CommandName%> {
+function New-UDCalendar {
     param(
         [Parameter()]
-        [string]$Id = (New-Guid).ToString(),
+        [string]$Id = ([Guid]::NewGuid()),
         [Parameter()]
-        [string]$Text
+        [object]$OnClickDay,
+        [Parameter()]
+        [object]$OnChange,
+        [Parameter()]
+        [DateTime]$StartView = (Get-Date -format "o"),
+        [Parameter()]
+        [Switch]$hideNavigation = $false
     )
 
     End {
+
+        if ($null -ne $OnChange) {
+            if ($OnChange -is [scriptblock]) {
+                $OnChange = New-UDEndpoint -Endpoint $OnChange -Id ($Id + "onChange")
+            }
+            elseif ($onChange -isnot [UniversalDashboard.Models.Endpoint]) {
+                throw "OnChange must be a script block or UDEndpoint."
+            }
+        }
+        if ($null -ne $OnClickDay) {
+            if ($OnClickDay -is [scriptblock]) {
+                $OnClickDay = New-UDEndpoint -Endpoint $OnClickDay -Id ($Id + "onClickDay")
+            }
+            elseif ($OnClickDay -isnot [UniversalDashboard.Models.Endpoint]) {
+                throw "OnClickDay must be a script block or UDEndpoint."
+            }
+        }
 
         @{
             # The AssetID of the main JS File
@@ -31,13 +54,14 @@ function <%=$PLASTER_PARAM_CommandName%> {
             # Tell UD this is a plugin
             isPlugin = $true 
             # This ID must be the same as the one used in the JavaScript to register the control with UD
-            type = "<%=$PLASTER_PARAM_ControlTypeName%>"
+            type = "ud-calendar"
             # An ID is mandatory 
             id = $Id
 
             # This is where you can put any other properties. They are passed to the React control's props
             # The keys are case-sensitive in JS. 
-            text = $Text
+            StartView = $StartView
+            hideNavigation = $hideNavigation
         }
 
     }
