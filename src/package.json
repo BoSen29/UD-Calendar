@@ -1,17 +1,18 @@
 {
-  "name": "<%=$PLASTER_PARAM_ControlName%>",
-  "version": "<%=$PLASTER_PARAM_ControlVersion%>",
-  "description": "<%=$PLASTER_PARAM_ControlDescription%>",
+  "name": "ud-calendar",
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack -p --env production",
     "dev": "webpack -p --env development"
   },
-  "author": "<%=$PLASTER_PARAM_Author%>",
+  "author": "BoSen29",
   "license": "ISC",
   "dependencies": {
     "react": "16.9.0",
+    "react-calendar": "^2.19.2",
     "react-dom": "16.9.0"
   },
   "devDependencies": {

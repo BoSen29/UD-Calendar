@@ -17,7 +17,7 @@ module.exports = (env) => {
       filename: isDev ? '[name].bundle.js' : '[name].[hash].bundle.js',
       sourceMapFilename: '[name].[hash].bundle.map',
       publicPath: "/",
-      library: "<%=$PLASTER_PARAM_ControlName%>",
+      library: "UDCalendar",
       libraryTarget: 'var'
     },
     module : {

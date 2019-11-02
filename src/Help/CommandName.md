@@ -1,6 +1,6 @@
 ---
-external help file: UniversalDashboard.<%=$PLASTER_PARAM_ControlName%>-help.xml
-Module Name: UniversalDashboard.<%=$PLASTER_PARAM_ControlName%>
+external help file: UniversalDashboard.UD-Calendar-help.xml
+Module Name: UniversalDashboard.UD-Calendar
 online version:
 schema: 2.0.0
 ---

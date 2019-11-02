@@ -24,12 +24,14 @@ function New-UDCalendar {
         [Parameter()]
         [object]$OnChange,
         [Parameter()]
-        [DateTime]$StartView = (Get-Date -format "o"),
+        [DateTime]$StartView = (Get-Date),
         [Parameter()]
-        [Switch]$hideNavigation = $false
+        [Switch]$hideNavigation
     )
 
     End {
+        $activeOnChange = "false"
+        $activeOnClickDay = "false"
 
         if ($null -ne $OnChange) {
             if ($OnChange -is [scriptblock]) {
@@ -38,6 +40,7 @@ function New-UDCalendar {
             elseif ($onChange -isnot [UniversalDashboard.Models.Endpoint]) {
                 throw "OnChange must be a script block or UDEndpoint."
             }
+            $activeOnChange = "true"
         }
         if ($null -ne $OnClickDay) {
             if ($OnClickDay -is [scriptblock]) {
@@ -46,6 +49,13 @@ function New-UDCalendar {
             elseif ($OnClickDay -isnot [UniversalDashboard.Models.Endpoint]) {
                 throw "OnClickDay must be a script block or UDEndpoint."
             }
+            $activeOnClickDay = "true"
+        }
+        if ($hideNavigation) {
+            $showNavigation = "false"
+        }
+        else {
+            $showNavigation = "true"
         }
 
         @{
@@ -57,12 +67,29 @@ function New-UDCalendar {
             type = "ud-calendar"
             # An ID is mandatory 
             id = $Id
+            activeOnChange = $activeOnChange
+            $activeOnClickDay = $activeOnClickDay
 
             # This is where you can put any other properties. They are passed to the React control's props
             # The keys are case-sensitive in JS. 
-            StartView = $StartView
-            hideNavigation = $hideNavigation
+            StartView = $StartView.GetDateTimeFormats("o")
+            ShowNavigation = $ShowNavigation
         }
 
     }
+}
+
+function Out-UDCalDate {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
+        [string]$date
+    )
+    try {
+        return [datetime]$date
+    }
+    catch {
+        throw "Failed to convert time to datetime."
+    }
+    
 }

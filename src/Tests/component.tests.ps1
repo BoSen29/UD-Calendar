@@ -2,7 +2,7 @@
 # Stop the testing dashboard that run on port 10000 if it alredy running.
 # Stop-UDDashboard -Port 10000 -ErrorAction SilentlyContinue
 
-Describe "<%=$PLASTER_PARAM_ControlName%>" {
+Describe "UD-Calendar" {
 
     Context "content" {
         
