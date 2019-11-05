@@ -4,7 +4,7 @@ A dynamic calendar for Universal Dashboard.
 ### Installation
 
 ```
-Install-module UniversalDashboard.UDCalendar
+Install-module UniversalDashboard.UD-Calendar
 ``` 
 
 Either that or clone the repo, and run build.ps1
