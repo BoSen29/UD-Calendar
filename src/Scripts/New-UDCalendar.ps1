@@ -70,31 +70,3 @@ function New-UDCalendar {
     }
 }
 
-function Out-UDCalDate {
-    [CmdletBinding()]
-    param (
-        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
-        [string]$date
-    )
-    try {
-        return [datetime]$date
-    }
-    catch {
-        throw "Failed to convert time to datetime."
-    }
-    
-}
-
-function Get-UDCalElement {
-    [CmdletBinding()]
-    param (
-        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
-        [string]$Id
-    )
-    try {
-        return ((Get-UDElement -Id $Id).Attributes.date | Out-UDCalDate);
-    }
-    catch {
-        throw "Failed getting the calendar data."
-    }
-}

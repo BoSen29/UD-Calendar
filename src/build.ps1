@@ -31,12 +31,14 @@ $manifestParameters = @{
 	CompanyName = "Ironman Software, LLC"
 	Copyright = "2019 Ironman Software, LLC"
 	RootModule = "UniversalDashboard.UD-Calendar.psm1"
-	Description = "Calendar for UD"
+	Description = "Fancy calendar for fancy people using Universal Dashboard."
 	ModuleVersion = $Version
 	Tags = @("universaldashboard")
 	ReleaseNotes = "First edition"
 	FunctionsToExport = @(
-		"New-UDCalendar"
+        "New-UDCalendar",
+        "Get-UDCalElement",
+        "Out-UDCalDate"
 	)
 }
 
